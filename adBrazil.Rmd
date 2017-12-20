@@ -1,0 +1,21 @@
+---
+title: "Brazilian Airdromes"
+author: "Allan Meirino"
+date: "19 de dezembro de 2017"
+output: html_document
+---
+
+## Brazilian Airdromes
+
+This is a map with markers for all the registered Brazilian airdromes.
+
+```{r, echo = FALSE, message = FALSE, prompt = FALSE, warning = FALSE}
+library(leaflet)
+adBrazil <- read.csv("AerodromosBrasil.csv", sep = ";")
+names(adBrazil) <- c("icao_code", "type", "lat", "lng")
+adBrazil %>%
+        leaflet() %>%
+        addTiles() %>%
+        addMarkers(popup = adBrazil$icao_code,
+                   clusterOptions = markerClusterOptions())
+```
